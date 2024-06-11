@@ -236,7 +236,7 @@ export const renderEntitiesRow = (config: RoomCardConfig | RoomCardRow, entities
 }
 
 export const renderEntity = (entity: RoomCardEntity, hass: HomeAssistant, element: LitElement) : HTMLTemplateResult => {    
-    if (entity.stateObj == undefined || hideIfEntity(entity, hass)) {
+    if ( (entity.stateObj == undefined || hideIfEntity(entity, hass)) && entity.icon == undefined ) {
         return null;
     }                
     
