@@ -78,6 +78,14 @@ export const entityStateDisplay = (hass: HomeAssistant, entity: RoomCardEntity) 
         return hass.localize(`state.default.${entity.stateObj.state}`);
     }
 
+    if (entity.attribute && [LAST_CHANGED, LAST_UPDATED].includes(entity.attribute)) {
+        return html`<ha-relative-time
+            .hass=${hass}
+            .datetime=${(entity.attribute === LAST_CHANGED ? entity.stateObj.last_changed : entity.stateObj.last_updated)}
+            capitalize
+        ></ha-relative-time>`;
+    }
+
     let value = getValue(entity);
     let unit = entity.attribute !== undefined
             ? entity.unit
